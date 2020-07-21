@@ -9,7 +9,9 @@ public class DamagePlayer : MonoBehaviour
         if(collision.tag == "Enemy")
         {
             GameManager.lives--;
+            GameManager.pc_livesLost++;
             GameManager.numEnemiesLeft--;
+            Destroy(collision);
         }
     }
 }

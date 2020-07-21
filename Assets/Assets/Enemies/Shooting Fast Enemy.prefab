@@ -176,6 +176,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 337b50288351100438dd506941a2008d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDropBombs: 1
+  canDropLives: 1
+  bombDropPrefab: {fileID: 4049147865216070967, guid: 7943e1f5cd3c71143862f29781d51fd9,
+    type: 3}
+  lifeDropPrefab: {fileID: 2605358880373933027, guid: 5606d3616118cd84a84d73d59ffb226e,
+    type: 3}
   health: 50
   movementSpeed: 1.5
   scoreValue: 100

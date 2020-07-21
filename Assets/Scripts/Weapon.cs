@@ -43,7 +43,6 @@ public class Weapon : MonoBehaviour
     {
         if (canNuke)
         {
-            Debug.Log("nuked");
             //return all active enemies in the scene
             Enemy[] enemies = FindObjectsOfType<Enemy>();
 

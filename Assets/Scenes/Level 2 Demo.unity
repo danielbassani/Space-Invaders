@@ -371,6 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 273779555}
   gameUI: {fileID: 384289240}
+  bombSpawner: {fileID: 676043380}
 --- !u!114 &64983734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,6 +694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueUI: {fileID: 1312723804}
   panel: {fileID: 1238501465}
+  bombSpawner: {fileID: 676043380}
   text:
   - Great job earlier Commander! We we're able to hold off their first round of ships.
   - It looks like they're sending another wave though. It seems that they're sending
@@ -710,7 +712,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &168281036
 GameObject:
@@ -1584,6 +1586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbc465d4ece0e244958657dab095a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEndless: 0
   scoreText: {fileID: 1254480057}
   numEnemiesText: {fileID: 1868359830}
   numLivesText: {fileID: 184070059}
@@ -1594,7 +1597,7 @@ MonoBehaviour:
   moneyEarnedText: {fileID: 168281038}
   bombsText: {fileID: 0}
   gameUI: {fileID: 384289240}
-  gameOverUI: {fileID: 0}
+  gameOverUI: {fileID: 1633315460}
   winLevelUI: {fileID: 1107337123}
 --- !u!4 &514904251
 Transform:
@@ -1608,7 +1611,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &514904252
 AudioSource:
@@ -2332,6 +2335,86 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7752428048648701667}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &676043379
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7733717557944549600, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_Name
+      value: Bomb Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549600, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 470.7707
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 990.1976
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -174
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7d8664cfbd4904542af77dec17755b17, type: 3}
+--- !u!1 &676043380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7733717557944549600, guid: 7d8664cfbd4904542af77dec17755b17,
+    type: 3}
+  m_PrefabInstance: {fileID: 676043379}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &684369622
 GameObject:
   m_ObjectHideFlags: 0
@@ -2539,7 +2622,7 @@ Transform:
   m_LocalScale: {x: 2.2851553, y: 1.108806, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &698650352
 GameObject:
@@ -2620,7 +2703,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &713040682
 GameObject:
@@ -2886,7 +2969,7 @@ Transform:
   - {fileID: 124572740}
   - {fileID: 1463069110}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &987380741
 PrefabInstance:
@@ -3578,7 +3661,7 @@ Transform:
   m_Children:
   - {fileID: 642073570}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1292251665
 GameObject:
@@ -3612,7 +3695,7 @@ Transform:
   - {fileID: 259226416}
   - {fileID: 589952280}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1294631528
 GameObject:
@@ -4291,7 +4374,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1546672870
 GameObject:
@@ -5654,7 +5737,7 @@ PrefabInstance:
     - target: {fileID: 7149231127396177142, guid: 9a1978de5752c7e40bf736787d7b48a3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7149231127396177142, guid: 9a1978de5752c7e40bf736787d7b48a3,
         type: 3}

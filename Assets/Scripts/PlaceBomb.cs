@@ -15,7 +15,7 @@ public class PlaceBomb : MonoBehaviour
             touch = Input.GetTouch(0);
             Vector2 pos = Camera.main.ScreenToWorldPoint(touch.position);
 
-            if(touch.phase == TouchPhase.Began && touch.position.y > 300 && GameManager.bombs > 0)
+            if(touch.phase == TouchPhase.Began && GameManager.bombs > 0)
             {
                 Instantiate(bombPrefab, pos, Quaternion.identity);
                 GameManager.bombs--;

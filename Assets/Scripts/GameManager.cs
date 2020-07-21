@@ -27,8 +27,11 @@ public class GameManager : MonoBehaviour
     public static float accuracy;
     public static int moneyEarned;
     public static int expEarned;
-    public static bool isEndless = false;
     public static byte damageRate;
+
+    public static int level;
+
+    public bool isEndless = false;
 
     public Text scoreText;
     public Text numEnemiesText;
@@ -40,12 +43,12 @@ public class GameManager : MonoBehaviour
     public Text moneyEarnedText;
     public Text bombsText;
 
+
     public GameObject gameUI;
     public GameObject gameOverUI;
     public GameObject winLevelUI;
 
     private bool runWinScreen = false;
-    private int level;
     private byte moneyRate;
     private byte expRate;
     
@@ -70,16 +73,19 @@ public class GameManager : MonoBehaviour
         Load();
 
 
-        if (isEndless)
+        if (SceneManager.GetActiveScene().name == "Endless Mode")
         {
+            isEndless = true;
             numEnemiesToSpawn = 10;
             numEnemiesLeft = 10;
-        }else if(level == 1)
+        }
+        else if (level == 1)
         {
             //only default enemies
             numEnemiesToSpawn = 10;
             numEnemiesLeft = 10;
-        }else if (level == 2)
+        }
+        else if (level == 2)
         {
             //only default enemies, spawn faster
             numEnemiesToSpawn = 15;
@@ -90,18 +96,20 @@ public class GameManager : MonoBehaviour
             //only default enemies, spawn even faster
             numEnemiesToSpawn = 20;
             numEnemiesLeft = 20;
-        }else if (level == 4)
+        }
+        else if (level == 4)
         {
             //only big enemies
             numEnemiesToSpawn = 10;
             numEnemiesLeft = 10;
-        }else if(level == 5)
+        }
+        else if (level == 5)
         {
             //only big enemies, spawn faster
             numEnemiesToSpawn = 15;
             numEnemiesLeft = 15;
         }
-        else if(level == 6)
+        else if (level == 6)
         {
             //only big enemies, spawn even faster
             numEnemiesToSpawn = 20;
@@ -120,27 +128,74 @@ public class GameManager : MonoBehaviour
             numEnemiesToSpawn = 25;
             numEnemiesLeft = 25;
         }
-        else if(level == 9)
+        else if (level == 9)
         {
             //default and big enemies, spawn even faster
-            numEnemiesToSpawn = 20;
-            numEnemiesLeft = 20;
+            numEnemiesToSpawn = 30;
+            numEnemiesLeft = 30;
         }
         else if (level == 10)
         {
             //boss level
             numEnemiesToSpawn = 0;
             numEnemiesLeft = 1;
-        }else if (level == 11)
-        {
-            numEnemiesToSpawn = 15;
-            numEnemiesLeft = 15;
         }
-
-        //check if I should give the player bombs
-        if(level > 10)
+        else if (level == 11)
         {
+            //default, big enemies spawning fast
+            numEnemiesToSpawn = 40;
+            numEnemiesLeft = 40;
             bombs = 5;
+        }
+        else if (level == 12)
+        {
+            //fast enemies
+            numEnemiesToSpawn = 20;
+            numEnemiesLeft = 20;
+            bombs = 5;
+        }
+        else if (level == 13)
+        {
+            //fast enemies spawn faster, with default enemies
+            numEnemiesToSpawn = 30;
+            numEnemiesLeft = 30;
+            bombs = 5;
+        }
+        else if (level == 14)
+        {
+            //fast enemies spawn faster, with big enemies
+            numEnemiesToSpawn = 35;
+            numEnemiesLeft = 35;
+            bombs = 5;
+        }
+        else if (level == 15)
+        {
+            //fast enemies spawn faster, with default shooting enemies
+            numEnemiesToSpawn = 40;
+            numEnemiesLeft = 40;
+            bombs = 5;
+        }
+        else if (level == 16)
+        {
+            //fast enemies spawn faster, with big shooting enemies
+            numEnemiesToSpawn = 45;
+            numEnemiesLeft = 45;
+            bombs = 5;
+        }
+        else if (level == 17)
+        {
+            //default enemies, big enemies and fast enemies
+            numEnemiesToSpawn = 45;
+            numEnemiesLeft = 45;
+            bombs = 5;
+        }
+        else if (level == 18)
+        {
+            //use bombs only
+            //default enemies, big enemies
+            numEnemiesToSpawn = 45;
+            numEnemiesLeft = 45;
+            bombs = 30;
         }
     }
 
@@ -212,7 +267,7 @@ public class GameManager : MonoBehaviour
 
         //add to global pc stats before saving
         pc_kills += (int)kills;
-        pc_livesLost += (int)(Upgrades.livesUpgraded - lives);
+        //livesLost gets added to in DamagePlayer.cs
         pc_bulletsFired += (int)(bulletsFired);
         pc_moneyEarned += (int)(moneyEarned);
         SavePlayerCard();

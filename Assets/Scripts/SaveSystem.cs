@@ -99,4 +99,29 @@ public static class SaveSystem
             return null;
         }
     }
+
+    public static void DeleteSaveData()
+    {
+        string path = Application.persistentDataPath + "/playercard.spc";
+        string path2 = Application.persistentDataPath + "/stats.spc";
+        string path3 = Application.persistentDataPath + "/upgrades.spc";
+
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+
+        if (File.Exists(path2))
+        {
+            File.Delete(path2);
+        }
+
+        if (File.Exists(path3))
+        {
+            File.Delete(path3);
+        }
+
+        UnityEditor.AssetDatabase.Refresh();
+
+    }
 }

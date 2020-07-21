@@ -12,6 +12,8 @@ TagManager:
   - Boss
   - Level 5 Boss
   - Bomb Explosion
+  - Not Bombable
+  - Bomb
   layers:
   - Default
   - TransparentFX

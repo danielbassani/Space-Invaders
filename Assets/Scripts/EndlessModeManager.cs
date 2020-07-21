@@ -20,23 +20,22 @@ public class EndlessModeManager : MonoBehaviour
 
     private void Start()
     {
-        GameManager.isEndless = true;
         unlockSound = unlockText.GetComponentInChildren<AudioSource>();
     }
 
     private void Update()
     {
-        if (GameManager.kills == 2 && !hasPlayed)
+        if (GameManager.kills == 15 && !hasPlayed)
         {
             UnlockBombs();
             hasPlayed = true;
         }
-        else if (GameManager.kills == 5 && !hasPlayed)
+        else if (GameManager.kills == 60 && !hasPlayed)
         {
             UnlockNuke();
             hasPlayed = true;
         }
-        else if (GameManager.kills == 25 && !hasPlayed)
+        else if (GameManager.kills == 20 && !hasPlayed)
         {
             UnlockBigEnemies();
             hasPlayed = true;
@@ -46,17 +45,17 @@ public class EndlessModeManager : MonoBehaviour
             UnlockFastEnemies();
             hasPlayed = true;
         }
-        else if (GameManager.kills == 45 && !hasPlayed)
+        else if (GameManager.kills == 50 && !hasPlayed)
         {
             UnlockDefaultShootingEnemies();
             hasPlayed = true;
         }
-        else if (GameManager.kills == 55 && !hasPlayed)
+        else if (GameManager.kills == 70 && !hasPlayed)
         {
             UnlockBigShootingEnemies();
             hasPlayed = true;
         }
-        else if (GameManager.kills == 65 && !hasPlayed)
+        else if (GameManager.kills == 100 && !hasPlayed)
         {
             UnlockFastShootingEnemies();
             hasPlayed = true;

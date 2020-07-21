@@ -231,7 +231,7 @@ Transform:
   - {fileID: 2057774944}
   - {fileID: 1606765786}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &140052680
 GameObject:
@@ -1142,7 +1142,7 @@ Transform:
   m_LocalScale: {x: 2.2851553, y: 1.108806, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &496735123
 GameObject:
@@ -1869,7 +1869,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &732148101
 GameObject:
@@ -1986,7 +1986,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0.000061035156, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &765912901
@@ -2434,6 +2434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 309686649}
   gameUI: {fileID: 2067253992}
+  bombSpawner: {fileID: 1249708151}
 --- !u!114 &967361620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3173,6 +3174,86 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218868371}
   m_CullTransparentMesh: 0
+--- !u!1001 &1249708150
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7733717557944549600, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_Name
+      value: Bomb Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549600, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 470.7707
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 990.1976
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -174
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7d8664cfbd4904542af77dec17755b17, type: 3}
+--- !u!1 &1249708151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7733717557944549600, guid: 7d8664cfbd4904542af77dec17755b17,
+    type: 3}
+  m_PrefabInstance: {fileID: 1249708150}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1263628333
 GameObject:
   m_ObjectHideFlags: 0
@@ -3279,7 +3360,7 @@ Transform:
   m_Children:
   - {fileID: 642073570}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1292251665
 GameObject:
@@ -3313,7 +3394,7 @@ Transform:
   - {fileID: 259226416}
   - {fileID: 589952280}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1336299632
 GameObject:
@@ -3662,7 +3743,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1494480252
 GameObject:
@@ -4180,6 +4261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueUI: {fileID: 308130130}
   panel: {fileID: 228083176}
+  bombSpawner: {fileID: 1249708151}
   text:
   - Man these guys just don't give up do they? They're sending another wave of those
     weak lackeys.
@@ -4197,7 +4279,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1705053279
 GameObject:
@@ -5487,7 +5569,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2082633402
 MonoBehaviour:
@@ -5501,6 +5583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbc465d4ece0e244958657dab095a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEndless: 0
   scoreText: {fileID: 496735125}
   numEnemiesText: {fileID: 2002951531}
   numLivesText: {fileID: 286368446}
@@ -5511,7 +5594,7 @@ MonoBehaviour:
   moneyEarnedText: {fileID: 399278346}
   bombsText: {fileID: 0}
   gameUI: {fileID: 2067253992}
-  gameOverUI: {fileID: 0}
+  gameOverUI: {fileID: 765912899}
   winLevelUI: {fileID: 579309668}
 --- !u!82 &2082633403
 AudioSource:
@@ -5665,7 +5748,7 @@ PrefabInstance:
     - target: {fileID: 7149231127396177142, guid: 9a1978de5752c7e40bf736787d7b48a3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7149231127396177142, guid: 9a1978de5752c7e40bf736787d7b48a3,
         type: 3}

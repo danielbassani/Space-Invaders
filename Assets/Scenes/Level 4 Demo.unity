@@ -663,8 +663,88 @@ Transform:
   - {fileID: 165082326}
   - {fileID: 1099090600}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &194171445
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7733717557944549600, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_Name
+      value: Bomb Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549600, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 470.7707
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 990.1976
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -174
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733717557944549602, guid: 7d8664cfbd4904542af77dec17755b17,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7d8664cfbd4904542af77dec17755b17, type: 3}
+--- !u!1 &194171446 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7733717557944549600, guid: 7d8664cfbd4904542af77dec17755b17,
+    type: 3}
+  m_PrefabInstance: {fileID: 194171445}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &259226416 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7752428047381395028, guid: 09419a07492988146a9fb57a396fa7dc,
@@ -709,7 +789,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0.000061035156, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &295608682
@@ -2056,6 +2136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueUI: {fileID: 469042692}
   panel: {fileID: 163623989}
+  bombSpawner: {fileID: 194171446}
   text:
   - Commander! I see some larger ships incoming!
   - They seem slower than the last ones, but they'll be a little harder to take down.
@@ -2073,7 +2154,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &698650352
 GameObject:
@@ -2154,7 +2235,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &727103774
 GameObject:
@@ -3566,7 +3647,7 @@ Transform:
   m_Children:
   - {fileID: 1445533809}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1292251665
 GameObject:
@@ -3600,7 +3681,7 @@ Transform:
   - {fileID: 259226416}
   - {fileID: 589952280}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1445533808
 PrefabInstance:
@@ -3723,6 +3804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1701209408}
   gameUI: {fileID: 1818014845}
+  bombSpawner: {fileID: 194171446}
 --- !u!114 &1475010376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3902,7 +3984,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1502469439
 GameObject:
@@ -4989,7 +5071,7 @@ Transform:
   m_LocalScale: {x: 2.2851553, y: 1.108806, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1850930005
 GameObject:
@@ -5388,7 +5470,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2082633402
 MonoBehaviour:
@@ -5402,6 +5484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbc465d4ece0e244958657dab095a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEndless: 0
   scoreText: {fileID: 411606049}
   numEnemiesText: {fileID: 609547244}
   numLivesText: {fileID: 1232467967}
@@ -5412,7 +5495,7 @@ MonoBehaviour:
   moneyEarnedText: {fileID: 1850930007}
   bombsText: {fileID: 0}
   gameUI: {fileID: 1818014845}
-  gameOverUI: {fileID: 0}
+  gameOverUI: {fileID: 295608680}
   winLevelUI: {fileID: 971903513}
 --- !u!82 &2082633403
 AudioSource:
@@ -5665,7 +5748,7 @@ PrefabInstance:
     - target: {fileID: 7149231127396177142, guid: 9a1978de5752c7e40bf736787d7b48a3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7149231127396177142, guid: 9a1978de5752c7e40bf736787d7b48a3,
         type: 3}
