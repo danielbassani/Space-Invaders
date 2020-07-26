@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public static int pc_livesLost;
     public static int pc_bulletsFired;
     public static int pc_moneyEarned;
+    public static int levelUnlock;
 
     //stats per level! MUST BE SET TO 0 IN START FUNCTION (too lazy to make them object variables because then I need to create references
     //to them via objects)
@@ -192,10 +193,65 @@ public class GameManager : MonoBehaviour
         else if (level == 18)
         {
             //use bombs only
-            //default enemies, big enemies
+            //default enemies spawn fast
             numEnemiesToSpawn = 45;
             numEnemiesLeft = 45;
-            bombs = 30;
+            bombs = 45;
+        }
+        else if (level == 19)
+        {
+            //use bombs only
+            //default and big enemies
+            numEnemiesToSpawn = 45;
+            numEnemiesLeft = 45;
+            bombs = 55;
+        }
+        else if (level == 20)
+        {
+            //use bombs only
+            //default and big enemies, spawn faster, less bombs
+            numEnemiesToSpawn = 45;
+            numEnemiesLeft = 45;
+            bombs = 40;
+        }
+        else if (level == 21)
+        {
+            //use bombs only
+            //big and fast enemies
+            numEnemiesToSpawn = 50;
+            numEnemiesLeft = 50;
+            bombs = 60;
+        }
+        else if (level == 22)
+        {
+            //use bombs only
+            //big and fast enemies, spawn faster
+            numEnemiesToSpawn = 50;
+            numEnemiesLeft = 50;
+            bombs = 50;
+        }
+        else if (level == 23)
+        {
+            //use bombs only
+            //default, big and fast enemies
+            numEnemiesToSpawn = 55;
+            numEnemiesLeft = 55;
+            bombs = 50;
+        }
+        else if (level == 24)
+        {
+            //use bombs only
+            //default, big and fast enemies, spawn faster
+            numEnemiesToSpawn = 60;
+            numEnemiesLeft = 60;
+            bombs = 60;
+        }
+        else if (level == 25)
+        {
+            //boss level
+            numEnemiesToSpawn = 0;
+            numEnemiesLeft = 1;
+            bombs = 5;
         }
     }
 
@@ -263,7 +319,7 @@ public class GameManager : MonoBehaviour
         //add money and exp gained from level completed, then save
         money += (int)(moneyEarned * (moneyRate/100f));
         exp += (int)(expEarned * (expRate/100f));
-        SaveMoneyExp();
+        SaveSaveData();
 
         //add to global pc stats before saving
         pc_kills += (int)kills;
@@ -272,6 +328,8 @@ public class GameManager : MonoBehaviour
         pc_moneyEarned += (int)(moneyEarned);
         SavePlayerCard();
 
+        //unlock the next level in the level select
+        SaveLevelUnlock();
 
         Time.timeScale = 0f;
 
@@ -301,7 +359,7 @@ public class GameManager : MonoBehaviour
         winLevelUI.SetActive(true);
     }
 
-    public void SaveMoneyExp()
+    public void SaveSaveData()
     {
         SaveSystem.SaveStats(money, exp);
     }
@@ -309,6 +367,14 @@ public class GameManager : MonoBehaviour
     public void SavePlayerCard()
     {
         SaveSystem.SavePlayerCard(pc_kills, pc_livesLost, pc_bulletsFired, pc_moneyEarned);
+    }
+
+    public void SaveLevelUnlock()
+    {
+        if(level == levelUnlock)
+        {
+            SaveSystem.SaveLevelUnlock(level + 1);
+        }
     }
 
     public void Load()
@@ -359,6 +425,17 @@ public class GameManager : MonoBehaviour
             pc_livesLost = 0;
             pc_bulletsFired = 0;
             pc_moneyEarned = 0;
+        }
+
+        LevelData data4 = SaveSystem.LoadLevelUnlock();
+
+        if(data4 != null)
+        {
+            levelUnlock = data4.levelUnlock;
+        }
+        else
+        {
+            levelUnlock = 1;
         }
     }
 }

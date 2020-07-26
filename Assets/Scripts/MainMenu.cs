@@ -8,7 +8,13 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject upgradesScreen;
+    public GameObject damageScreen;
+    public GameObject livesScreen;
+    public GameObject moneyScreen;
+    public GameObject expScreen;
     public GameObject levelSelect;
+    public GameObject levelSelect1;
+    public GameObject levelSelect2;
     public GameObject playerCard;
     public GameObject devMenu;
     
@@ -17,21 +23,31 @@ public class MainMenu : MonoBehaviour
         Time.timeScale = 1f;
         mainMenu.SetActive(false);
         levelSelect.SetActive(true);
+        levelSelect1.SetActive(true);
     }
 
     public void Back()
     {
+        ScrollUpgrades.index = 0;
+        ScrollLevelSelect.index = 0;
         mainMenu.SetActive(true);
         upgradesScreen.SetActive(false);
         levelSelect.SetActive(false);
         devMenu.SetActive(false);
         playerCard.SetActive(false);
+        damageScreen.SetActive(false);
+        livesScreen.SetActive(false);
+        moneyScreen.SetActive(false);
+        expScreen.SetActive(false);
+        levelSelect1.SetActive(false);
+        levelSelect2.SetActive(false);
     }
 
     public void Upgrades()
     {
         mainMenu.SetActive(false);
         upgradesScreen.SetActive(true);
+        damageScreen.SetActive(true);
     }
 
     public void PlayerCard()
@@ -81,5 +97,6 @@ public class MainMenu : MonoBehaviour
     public void Retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
     }
 }

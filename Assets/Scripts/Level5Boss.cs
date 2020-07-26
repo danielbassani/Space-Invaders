@@ -12,6 +12,8 @@ public class Level5Boss : MonoBehaviour
     public float movementSpeed;
     public int scoreValue;
     public int moneyValue;
+    public float[] shootDelay;
+    public float moveDelay;
     public Rigidbody2D rb;
 
     private bool waitedShooting = true;
@@ -57,13 +59,21 @@ public class Level5Boss : MonoBehaviour
 
     private IEnumerator WaitShoot()
     {
-        yield return new WaitForSeconds(Random.Range(1.2f, 2.5f));
+        yield return new WaitForSeconds(Random.Range(shootDelay[0], shootDelay[1]));
         waitedShooting = true;
     }
 
     private IEnumerator WaitMove()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(moveDelay);
         waitedMoving = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Bomb Explosion")
+        {
+            health -= 100;
+        }
     }
 }

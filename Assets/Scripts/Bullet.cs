@@ -45,7 +45,7 @@ public class Bullet : MonoBehaviour
                     //decrease health
                     enemy.health -= damage * (damageRate/100);
                 }
-            }else if (collision.tag == "Level 5 Boss")
+            }else if (collision.tag == "Boss")
             {
                 GameManager.bulletsHit++;
 
@@ -74,6 +74,9 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject);
                 Destroy(collision.gameObject);
             }else if (collision.tag == "Barrier")
+            {
+                Destroy(gameObject);
+            }else if (collision.tag == "Bomb Explosion")
             {
                 Destroy(gameObject);
             }

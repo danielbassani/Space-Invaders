@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public bool canDropBombs = true;
+    public bool canDropBombs = false;
     public bool canDropLives = true;
     public GameObject bombDropPrefab;
     public GameObject lifeDropPrefab;
@@ -22,7 +22,12 @@ public class Enemy : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        if(GameManager.level >= 11)
+        {
+            canDropBombs = true;
+        }
+
         aud = GetComponent<AudioSource>();
         Move();   
     }
@@ -77,8 +82,8 @@ public class Enemy : MonoBehaviour
 
     private void TryDroppingBomb()
     {
-        int rand = Random.Range(1, 7);
-        if (rand == 4)
+        int rand = Random.Range(1, 8);
+        if (rand == 1)
         {
             Instantiate(bombDropPrefab, transform.position, transform.rotation);
             GameManager.bombs++;

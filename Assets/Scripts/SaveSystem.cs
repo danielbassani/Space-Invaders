@@ -40,6 +40,18 @@ public static class SaveSystem
         stream.Close();
     }
 
+    public static void SaveLevelUnlock(int levelUnlock)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/levelUnlock.spc";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        LevelData data = new LevelData(levelUnlock);
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
     public static SaveData LoadStats()
     {
         string path = Application.persistentDataPath + "/stats.spc";
@@ -100,6 +112,26 @@ public static class SaveSystem
         }
     }
 
+    public static LevelData LoadLevelUnlock()
+    {
+        string path = Application.persistentDataPath + "/levelUnlock.spc";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            LevelData data = (LevelData)formatter.Deserialize(stream);
+            stream.Close();
+
+            return data;
+        }
+        else
+        {
+            Debug.LogError("Save file not found in" + path);
+            return null;
+        }
+    }
+
     public static void DeleteSaveData()
     {
         string path = Application.persistentDataPath + "/playercard.spc";
@@ -120,8 +152,5 @@ public static class SaveSystem
         {
             File.Delete(path3);
         }
-
-        UnityEditor.AssetDatabase.Refresh();
-
     }
 }

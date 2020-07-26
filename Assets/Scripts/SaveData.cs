@@ -7,6 +7,7 @@ public class SaveData
 {
     public int money;
     public int exp;
+    public int levelUnlock;
 
     public SaveData(int money, int exp)
     {

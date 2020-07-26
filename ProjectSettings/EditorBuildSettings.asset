@@ -69,6 +69,27 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 18 Demo.unity
     guid: a0887c76828fa374cbfa5cd151804130
   - enabled: 1
+    path: Assets/Scenes/Level 19 Demo.unity
+    guid: 920202bf5d108aa499ecc67235fbc039
+  - enabled: 1
+    path: Assets/Scenes/Level 20 Demo.unity
+    guid: 72d1fa682f764484fb4689c87583bcfe
+  - enabled: 1
+    path: Assets/Scenes/Level 21 Demo.unity
+    guid: f5a98f1fec0bf7f46adb5e07243d4ff7
+  - enabled: 1
+    path: Assets/Scenes/Level 22 Demo.unity
+    guid: 167b0f533f1a01f47920782ba14bae4c
+  - enabled: 1
+    path: Assets/Scenes/Level 23 Demo.unity
+    guid: e6c19fc5bb3c2044ba3c012ba405ab0d
+  - enabled: 1
+    path: Assets/Scenes/Level 24 Demo.unity
+    guid: a17fc135ddababd4d8335bd201b227ab
+  - enabled: 1
+    path: Assets/Scenes/Level 25 Demo.unity
+    guid: 5802e1d21ff6aa34bbe201e227e8da0b
+  - enabled: 1
     path: Assets/Scenes/Endless Mode.unity
     guid: e0d4083480e720b45ac7efc24b117373
   m_configObjects: {}
