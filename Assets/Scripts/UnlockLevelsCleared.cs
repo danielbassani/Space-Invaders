@@ -1,16 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnlockLevelsCleared : MonoBehaviour
 {
-    public GameObject[] levels;
+    public Button[] levels;
 
     private void Start()
     {
-        for (int i = 0; i < GameManager.levelUnlock; i++)
+        for (int i = 0; i < levels.Length; i++)
         {
-            levels[i].SetActive(true);
+            if (i < GameManager.levelUnlock)
+            {
+                levels[i].interactable = true;
+            }
+            else
+            {
+                levels[i].interactable = false;
+            }
+            
         }
     }
 }

@@ -60,6 +60,7 @@ public class Bullet : MonoBehaviour
                 {
                     //decrease health
                     enemy.health -= damage * (damageRate/ 100f);
+                    enemy.healthBar.SetHealth(enemy.health);
                 }
             }
 

@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
+
         //get current level number
         level = SceneManager.GetActiveScene().buildIndex;
 

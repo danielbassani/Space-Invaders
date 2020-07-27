@@ -9,12 +9,14 @@ public class Level5Boss : MonoBehaviour
     public GameObject enemyBullet;
 
     public float health;
+    public float maxHealth;
     public float movementSpeed;
     public int scoreValue;
     public int moneyValue;
     public float[] shootDelay;
     public float moveDelay;
     public Rigidbody2D rb;
+    public HealthBar healthBar;
 
     private bool waitedShooting = true;
     private bool waitedMoving = true;
@@ -23,7 +25,9 @@ public class Level5Boss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        health = maxHealth;
         sidewaysSpeed = movementSpeed * 5;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     private void Update()
@@ -74,6 +78,7 @@ public class Level5Boss : MonoBehaviour
         if (collision.tag == "Bomb Explosion")
         {
             health -= 100;
+            healthBar.SetHealth(health);
         }
     }
 }
