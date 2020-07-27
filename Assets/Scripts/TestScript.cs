@@ -16,7 +16,7 @@ public class TestScript : MonoBehaviour
     }
 
     public void addMoney() {
-        GameManager.money += 1000;
+        GameManager.money += 100000;
     }
 
     public void addExp()

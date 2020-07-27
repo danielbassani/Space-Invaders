@@ -11,6 +11,7 @@ public class ScrollLevelSelect : MonoBehaviour
     {
         levelUIs[index].SetActive(false);
         index++;
+        Debug.Log(index);
         levelUIs[index].SetActive(true);
     }
 

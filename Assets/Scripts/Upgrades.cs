@@ -12,7 +12,7 @@ public class Upgrades : MonoBehaviour
 
     public static int damageCost = 2500;
     public static int livesCost = 5000;
-    public static int moneyCost = 5000;
+    public static int moneyCost = 7500;
     public static int expCost = 5000;
 
     public Text currentMoney;
@@ -27,9 +27,9 @@ public class Upgrades : MonoBehaviour
     public Button expButton;
 
     public static short damagePriceIncrement = 2500;
-    public static short livesPriceIncrement = 5000;
+    public static short livesPriceIncrement = 2500;
     public static short moneyPriceIncrement = 5000;
-    public static short expPriceIncrement = 5000;
+    public static short expPriceIncrement = 2500;
 
     public void Start()
     {
@@ -42,20 +42,9 @@ public class Upgrades : MonoBehaviour
             expRate = data.expRate;
 
             damageCost = (5000 + ((damageRate - 100)/5) * damagePriceIncrement);
-            livesCost = (10000 + (livesUpgraded - 3) * livesPriceIncrement);
-            moneyCost = (10000 + ((moneyRate - 100)/5) * moneyPriceIncrement);
-            expCost = (10000 + ((expRate - 100)/5) * expPriceIncrement);
-        }
-        else
-        {
-            damageRate = 100;
-            livesUpgraded = 3;
-            moneyRate = 100;
-            expRate = 100;
-            damageCost = 2500;
-            livesCost = 5000;
-            moneyCost = 5000;
-            expCost = 5000;
+            livesCost = (5000 + (livesUpgraded - 3) * livesPriceIncrement);
+            moneyCost = (7500 + ((moneyRate - 100)/5) * moneyPriceIncrement);
+            expCost = (5000 + ((expRate - 100)/5) * expPriceIncrement);
         }
 
         currentMoney.text = "$" + GameManager.money.ToString();

@@ -85,11 +85,13 @@ public class MainMenu : MonoBehaviour
 
     public void LoadEndlessMode()
     {
+        ScrollLevelSelect.index = 0;
         SceneManager.LoadScene("Endless Mode");
     }
 
     public void PlayLevel(int level)
     {
+        ScrollLevelSelect.index = 0;
         Time.timeScale = 1f;
         SceneManager.LoadScene(level);
     }
