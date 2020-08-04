@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour
 {
     //stats to save
     public static int money;
-    public static int exp;
     public static int pc_kills;
     public static int pc_livesLost;
     public static int pc_bulletsFired;
     public static int pc_moneyEarned;
+    public static int pc_currentExp;
+    public static int pc_expToNextLevel;
+    public static byte pc_rank;
     public static int levelUnlock;
 
     //stats per level! MUST BE SET TO 0 IN START FUNCTION (too lazy to make them object variables because then I need to create references
@@ -27,12 +29,13 @@ public class GameManager : MonoBehaviour
     public static float bulletsHit;
     public static float accuracy;
     public static int moneyEarned;
-    public static int expEarned;
     public static byte damageRate;
+    public static short bombDamage;
 
     public static int level;
 
-    public bool isEndless = false;
+    private bool isEndless = false;
+    private string sceneName;
 
     public Text scoreText;
     public Text numEnemiesText;
@@ -44,22 +47,26 @@ public class GameManager : MonoBehaviour
     public Text moneyEarnedText;
     public Text bombsText;
 
-
     public GameObject gameUI;
     public GameObject gameOverUI;
     public GameObject winLevelUI;
+    public GameObject bombSpawner;
 
     private bool runWinScreen = false;
     private byte moneyRate;
     private byte expRate;
-    
+    private float vol;
+
 
     private void Start()
     {
-        Time.timeScale = 1f;
-
-        //get current level number
+        if (!(DialogueManager.len > 0)){
+            Time.timeScale = 1f;
+        }     
+      
+        //get current level number and scene name
         level = SceneManager.GetActiveScene().buildIndex;
+        sceneName = SceneManager.GetActiveScene().name;
 
         //reset all static level-specific variables
         score = 0;
@@ -70,13 +77,15 @@ public class GameManager : MonoBehaviour
         bulletsHit = 0;
         accuracy = 0;
         moneyEarned = 0;
-        expEarned = 0;
 
         //load the save data (money, exp, upgrades data, player card data)
         Load();
 
+        //set volume from settings data
+        AudioListener.volume = vol;
 
-        if (SceneManager.GetActiveScene().name == "Endless Mode")
+
+        if (sceneName == "Endless Mode")
         {
             isEndless = true;
             numEnemiesToSpawn = 10;
@@ -85,177 +94,422 @@ public class GameManager : MonoBehaviour
         else if (level == 1)
         {
             //only default enemies
-            numEnemiesToSpawn = 10;
-            numEnemiesLeft = 10;
+            numEnemiesToSpawn = 25;
+            numEnemiesLeft = 25;
         }
         else if (level == 2)
         {
             //only default enemies, spawn faster
-            numEnemiesToSpawn = 15;
-            numEnemiesLeft = 15;
+            numEnemiesToSpawn = 35;
+            numEnemiesLeft = 35;
         }
         else if (level == 3)
         {
             //only default enemies, spawn even faster
-            numEnemiesToSpawn = 20;
-            numEnemiesLeft = 20;
+            numEnemiesToSpawn = 40;
+            numEnemiesLeft = 40;
         }
         else if (level == 4)
         {
-            //only big enemies
-            numEnemiesToSpawn = 10;
-            numEnemiesLeft = 10;
+            //default enemies, spawn faster, move faster
+            numEnemiesToSpawn = 45;
+            numEnemiesLeft = 45;
         }
         else if (level == 5)
         {
-            //only big enemies, spawn faster
-            numEnemiesToSpawn = 15;
-            numEnemiesLeft = 15;
+            //default enemies, spawn faster, move faster
+            numEnemiesToSpawn = 50;
+            numEnemiesLeft = 50;
         }
         else if (level == 6)
         {
-            //only big enemies, spawn even faster
-            numEnemiesToSpawn = 20;
-            numEnemiesLeft = 20;
-        }
-        else if (level == 7)
-        {
-            //default and big enemies
-            numEnemiesToSpawn = 20;
-            numEnemiesLeft = 20;
-
-        }
-        else if (level == 8)
-        {
-            //default and big enemies, spawn faster
+            //only big enemies
             numEnemiesToSpawn = 25;
             numEnemiesLeft = 25;
         }
+        else if (level == 7)
+        {
+            //only big enemies, spawn faster
+            numEnemiesToSpawn = 35;
+            numEnemiesLeft = 35;
+        }
+        
+        else if (level == 8)
+        {
+            //only big enemies, spawn even faster
+            numEnemiesToSpawn = 40;
+            numEnemiesLeft = 40;
+        }
+        
         else if (level == 9)
         {
-            //default and big enemies, spawn even faster
-            numEnemiesToSpawn = 30;
-            numEnemiesLeft = 30;
+            //big enemies, spawn faster, move faster
+            numEnemiesToSpawn = 45;
+            numEnemiesLeft = 45;
+
         }
         else if (level == 10)
         {
-            //boss level
-            numEnemiesToSpawn = 0;
-            numEnemiesLeft = 1;
+            //big enemies, spawn faster, move faster, introduce heart drops
+            numEnemiesToSpawn = 50;
+            numEnemiesLeft = 50;
         }
         else if (level == 11)
         {
-            //default, big enemies spawning fast
-            numEnemiesToSpawn = 40;
-            numEnemiesLeft = 40;
-            bombs = 5;
+            //default and big enemies
+            numEnemiesToSpawn = 50;
+            numEnemiesLeft = 50;
         }
+        
         else if (level == 12)
         {
-            //fast enemies
-            numEnemiesToSpawn = 20;
-            numEnemiesLeft = 20;
-            bombs = 5;
+            //default and big enemies, spawn faster
+            numEnemiesToSpawn = 60;
+            numEnemiesLeft = 60;
         }
+        
         else if (level == 13)
         {
-            //fast enemies spawn faster, with default enemies
-            numEnemiesToSpawn = 30;
-            numEnemiesLeft = 30;
-            bombs = 5;
+            //default, big enemies spawn faster
+            numEnemiesToSpawn = 70;
+            numEnemiesLeft = 70;
         }
         else if (level == 14)
         {
-            //fast enemies spawn faster, with big enemies
-            numEnemiesToSpawn = 35;
-            numEnemiesLeft = 35;
-            bombs = 5;
+            //default, big enemies spawn faster, move faster
+            numEnemiesToSpawn = 80;
+            numEnemiesLeft = 80;
         }
         else if (level == 15)
-        {
-            //fast enemies spawn faster, with default shooting enemies
-            numEnemiesToSpawn = 40;
-            numEnemiesLeft = 40;
-            bombs = 5;
-        }
-        else if (level == 16)
-        {
-            //fast enemies spawn faster, with big shooting enemies
-            numEnemiesToSpawn = 45;
-            numEnemiesLeft = 45;
-            bombs = 5;
-        }
-        else if (level == 17)
-        {
-            //default enemies, big enemies and fast enemies
-            numEnemiesToSpawn = 45;
-            numEnemiesLeft = 45;
-            bombs = 5;
-        }
-        else if (level == 18)
-        {
-            //use bombs only
-            //default enemies spawn fast
-            numEnemiesToSpawn = 45;
-            numEnemiesLeft = 45;
-            bombs = 45;
-        }
-        else if (level == 19)
-        {
-            //use bombs only
-            //default and big enemies
-            numEnemiesToSpawn = 45;
-            numEnemiesLeft = 45;
-            bombs = 55;
-        }
-        else if (level == 20)
-        {
-            //use bombs only
-            //default and big enemies, spawn faster, less bombs
-            numEnemiesToSpawn = 45;
-            numEnemiesLeft = 45;
-            bombs = 40;
-        }
-        else if (level == 21)
-        {
-            //use bombs only
-            //big and fast enemies
-            numEnemiesToSpawn = 50;
-            numEnemiesLeft = 50;
-            bombs = 60;
-        }
-        else if (level == 22)
-        {
-            //use bombs only
-            //big and fast enemies, spawn faster
-            numEnemiesToSpawn = 50;
-            numEnemiesLeft = 50;
-            bombs = 50;
-        }
-        else if (level == 23)
-        {
-            //use bombs only
-            //default, big and fast enemies
-            numEnemiesToSpawn = 55;
-            numEnemiesLeft = 55;
-            bombs = 50;
-        }
-        else if (level == 24)
-        {
-            //use bombs only
-            //default, big and fast enemies, spawn faster
-            numEnemiesToSpawn = 60;
-            numEnemiesLeft = 60;
-            bombs = 60;
-        }
-        else if (level == 25)
         {
             //boss level
             numEnemiesToSpawn = 0;
             numEnemiesLeft = 1;
-            bombs = 5;
+        }
+        else if (level == 16)
+        {
+            //default, big enemies
+            numEnemiesToSpawn = 60;
+            numEnemiesLeft = 60;
+            
+        }
+        else if(level == 17)
+        {
+            //default, big enemies spawn faster
+            numEnemiesToSpawn = 75;
+            numEnemiesLeft = 75;
+            
+        }
+        else if (level == 18)
+        {
+            //fast enemies
+            numEnemiesToSpawn = 30;
+            numEnemiesLeft = 30;
+            
+        }
+        else if (level == 19)
+        {
+            //fast enemies, default enemies
+            numEnemiesToSpawn = 75;
+            numEnemiesLeft = 75;
+            
+        }
+        else if (level == 20)
+        {
+            //fast enemies, default and big enemies
+            numEnemiesToSpawn = 75;
+            numEnemiesLeft = 75;
+            
+        }
+        else if (level == 21)
+        {
+            //shooting enemies
+            numEnemiesToSpawn = 40;
+            numEnemiesLeft = 40;
+            
+        }
+        else if (level == 22)
+        {
+            //shooting enemies
+            numEnemiesToSpawn = 50;
+            numEnemiesLeft = 50;
+            
+        }
+        else if (level == 23)
+        {
+            //shooting enemies, default enemies
+            numEnemiesToSpawn = 60;
+            numEnemiesLeft = 60;
+            
+        }
+        else if (level == 24)
+        {
+            //default enemies, big shooting enemies
+            numEnemiesToSpawn = 50;
+            numEnemiesLeft = 50;
+            
+        }
+        else if (level == 25)
+        {
+            //default enemies, big enemies, big shooting enemies
+            numEnemiesToSpawn = 60;
+            numEnemiesLeft = 60;
+            
+        }
+        else if (level == 26)
+        {
+            //big shooting enemies, fast enemies
+            numEnemiesToSpawn = 60;
+            numEnemiesLeft = 60;
+            
+        }
+        else if (level == 27)
+        {
+            //fast shooting enemies
+            numEnemiesToSpawn = 40;
+            numEnemiesLeft = 40;
+            
+        }
+        else if (level == 28)
+        {
+            //fast shooting enemies, default shooting enemies
+            numEnemiesToSpawn = 60;
+            numEnemiesLeft = 60;
+           
+        }
+        else if (level == 29)
+        {
+            //fast shooting enemies, default enemies, big enemies
+            numEnemiesToSpawn = 70;
+            numEnemiesLeft = 70;
+            
+        }
+        else if (level == 30)
+        {
+            //boss
+            numEnemiesToSpawn = 0;
+            numEnemiesLeft = 1;
+            
+        }
+        else if (level == 31)
+        {
+            //use bombs only
+            //default enemies spawn fast
+            numEnemiesToSpawn = 80;
+            numEnemiesLeft = 80;
+            bombs = 70;
+        }
+        else if (level == 32)
+        {
+            //use bombs only
+            //default and big enemies
+            numEnemiesToSpawn = 100;
+            numEnemiesLeft = 100;
+            bombs = 85;
+        }
+        else if (level == 33)
+        {
+            //use bombs only
+            //default and big enemies, spawn faster, less bombs
+            numEnemiesToSpawn = 150;
+            numEnemiesLeft = 150;
+            bombs = 105;
+        }
+        else if (level == 34)
+        {
+            //use bombs only
+            //big and fast enemies
+            numEnemiesToSpawn = 150;
+            numEnemiesLeft = 150;
+            bombs = 170;
+        }
+        else if (level == 35)
+        {
+            //use bombs only
+            //big and fast enemies, spawn faster
+            numEnemiesToSpawn = 150;
+            numEnemiesLeft = 150;
+            bombs = 140;
+        }
+        else if (level == 36)
+        {
+            //use bombs only
+            //default, big and fast enemies
+            numEnemiesToSpawn = 150;
+            numEnemiesLeft = 150;
+            bombs = 150;
+        }
+        else if (level == 37)
+        {
+            //use bombs only
+            //default, big and fast enemies, spawn faster
+            numEnemiesToSpawn = 150;
+            numEnemiesLeft = 150;
+            bombs = 120;
+        }
+        else if (level == 38)
+        {
+            //use bombs only
+            //shooting default enemies
+            numEnemiesToSpawn = 80;
+            numEnemiesLeft = 80;
+            bombs = 70;
+        }
+        else if (level == 39)
+        {
+            //use bombs only
+            //default shooting, big enemies
+            numEnemiesToSpawn = 90;
+            numEnemiesLeft = 90;
+            bombs = 90;
+        }
+        else if (level == 40)
+        {
+            //use bombs only
+            //default shooting, fast enemies
+            numEnemiesToSpawn = 80;
+            numEnemiesLeft = 80;
+            bombs = 80;
+        }
+        else if (level == 41)
+        {
+            //limited ammo
+            //default enemies
+            numEnemiesToSpawn = 80;
+            numEnemiesLeft = 80;
+        }
+        else if (level == 42)
+        {
+            //limited ammo
+            //big enemies
+            numEnemiesToSpawn = 50;
+            numEnemiesLeft = 50;
+        }
+        else if (level == 43)
+        {
+            //limited ammo
+            //fast enemies
+            numEnemiesToSpawn = 100;
+            numEnemiesLeft = 100;
+        }
+        else if (level == 44)
+        {
+            //limited ammo
+            //default shooting enemies and default enemies
+            numEnemiesToSpawn = 80;
+            numEnemiesLeft = 80;
+        }
+        else if (level == 45)
+        {
+            //limited ammo
+            //big enemies and big shooting enemies
+            numEnemiesToSpawn = 50;
+            numEnemiesLeft = 50;
+        }
+        else if (level == 46)
+        {
+            //limited ammo
+            //fast enemies and fast shooting enemies
+            numEnemiesToSpawn = 100;
+            numEnemiesLeft = 100;
+        }
+        else if (level == 47)
+        {
+            //limited ammo
+            //default and big enemies
+            numEnemiesToSpawn = 80;
+            numEnemiesLeft = 80;
+        }
+        else if (level == 48)
+        {
+            //limited ammo
+            //fast enemies, default
+            numEnemiesToSpawn = 125;
+            numEnemiesLeft = 125;
+        }
+        else if (level == 49)
+        {
+            //limited ammo
+            //big and fast enemies
+            numEnemiesToSpawn = 100;
+            numEnemiesLeft = 100;
+        }else if(level == 50)
+        {
+            //limited ammo
+            numEnemiesToSpawn = 0;
+            numEnemiesLeft = 1;
+        }
+        else if (level == 51)
+        {
+            //boss rush
+            //default enemies
+            numEnemiesToSpawn = 25;
+            numEnemiesLeft = 26;
+        }
+        else if (level == 52)
+        {
+            //boss rush
+            //big enemies
+            numEnemiesToSpawn = 25;
+            numEnemiesLeft = 26;
+        }
+        else if (level == 53)
+        {
+            //boss rush
+            //big enemies
+            numEnemiesToSpawn = 30;
+            numEnemiesLeft = 31;
+        }
+        else if (level == 54)
+        {
+            //boss rush
+            //default, big enemies
+            numEnemiesToSpawn = 50;
+            numEnemiesLeft = 51;
+        }
+        else if (level == 55)
+        {
+            //boss rush
+            //default, fast enemies
+            numEnemiesToSpawn = 70;
+            numEnemiesLeft = 71;
+        }
+        else if (level == 56)
+        {
+            //boss rush
+            //big, fast enemies
+            numEnemiesToSpawn = 50;
+            numEnemiesLeft = 51;
+        }
+        else if (level == 57)
+        {
+            //boss rush
+            //default shooting enemies
+            numEnemiesToSpawn = 20;
+            numEnemiesLeft = 21;
+        }
+        else if (level == 58)
+        {
+            //boss rush
+            //big shooting enemies
+            numEnemiesToSpawn = 25;
+            numEnemiesLeft = 26;
+        }
+        else if (level == 59)
+        {
+            //boss rush
+            //fast shooting enemies
+            numEnemiesToSpawn = 55;
+            numEnemiesLeft = 56;
+        }
+        else if (level == 60)
+        {
+            //final boss
+            numEnemiesToSpawn = 0;
+            numEnemiesLeft = 1;
         }
     }
+
 
     private void Update()
     {
@@ -303,7 +557,7 @@ public class GameManager : MonoBehaviour
             
         }
 
-        if(level > 10 && bombs >= 0)
+        if(level >= 16 && bombs >= 0)
         {
             bombsText.text = "x" + bombs;
         }
@@ -320,7 +574,6 @@ public class GameManager : MonoBehaviour
     {
         //add money and exp gained from level completed, then save
         money += (int)(moneyEarned * (moneyRate/100f));
-        exp += (int)(expEarned * (expRate/100f));
         SaveSaveData();
 
         //add to global pc stats before saving
@@ -328,6 +581,16 @@ public class GameManager : MonoBehaviour
         //livesLost gets added to in DamagePlayer.cs
         pc_bulletsFired += (int)(bulletsFired);
         pc_moneyEarned += (int)(moneyEarned);
+
+        //all this has to do with ranking-up
+        pc_currentExp += (int)(score * (expRate/100f));
+        if(pc_currentExp >= pc_expToNextLevel && pc_rank < 70)
+        {
+            pc_rank++;
+            pc_currentExp -= pc_expToNextLevel;
+            pc_expToNextLevel += 5000;
+        }
+
         SavePlayerCard();
 
         //unlock the next level in the level select
@@ -359,16 +622,21 @@ public class GameManager : MonoBehaviour
         moneyEarnedText.text = "Money Earned: $" + (int)(moneyEarned * (moneyRate / 100f));
         gameUI.SetActive(false);
         winLevelUI.SetActive(true);
+
+        if(level >= 16)
+        {
+            bombSpawner.SetActive(false);
+        }
     }
 
     public void SaveSaveData()
     {
-        SaveSystem.SaveStats(money, exp);
+        SaveSystem.SaveStats(money);
     }
 
     public void SavePlayerCard()
     {
-        SaveSystem.SavePlayerCard(pc_kills, pc_livesLost, pc_bulletsFired, pc_moneyEarned);
+        SaveSystem.SavePlayerCard(pc_kills, pc_livesLost, pc_bulletsFired, pc_moneyEarned, pc_currentExp, pc_expToNextLevel, pc_rank);
     }
 
     public void SaveLevelUnlock()
@@ -387,12 +655,10 @@ public class GameManager : MonoBehaviour
         if (data != null)
         {
             money = data.money;
-            exp = data.exp;
         }
         else
         {
             money = 0;
-            exp = 0;
         }
 
         UpgradeData data2 = SaveSystem.LoadUpgrades();
@@ -403,6 +669,8 @@ public class GameManager : MonoBehaviour
             moneyRate = data2.moneyRate;
             expRate = data2.expRate;
             damageRate = data2.damageRate;
+            bombs = data2.maxBombs;
+            bombDamage = data2.bombDamage;
         }
         else
         {
@@ -410,6 +678,8 @@ public class GameManager : MonoBehaviour
             moneyRate = 100;
             expRate = 100;
             damageRate = 100;
+            bombs = 5;
+            bombDamage = 165;
         }
 
         PlayerCard data3 = SaveSystem.LoadPlayerCard();
@@ -420,6 +690,9 @@ public class GameManager : MonoBehaviour
             pc_livesLost = data3.pc_livesLost;
             pc_bulletsFired = data3.pc_bulletsFired;
             pc_moneyEarned = data3.pc_moneyEarned;
+            pc_currentExp = data3.pc_expEarned;
+            pc_expToNextLevel = data3.pc_expToNextLevel;
+            pc_rank = data3.pc_rank;
         }
         else
         {
@@ -427,6 +700,9 @@ public class GameManager : MonoBehaviour
             pc_livesLost = 0;
             pc_bulletsFired = 0;
             pc_moneyEarned = 0;
+            pc_currentExp = 0;
+            pc_expToNextLevel = 5000;
+            pc_rank = 1;
         }
 
         LevelData data4 = SaveSystem.LoadLevelUnlock();
@@ -438,6 +714,16 @@ public class GameManager : MonoBehaviour
         else
         {
             levelUnlock = 1;
+        }
+
+        SettingsData data5 = SaveSystem.LoadSettings();
+        if(data5 != null)
+        {
+            vol = data5.volume;
+        }
+        else
+        {
+            vol = 1;
         }
     }
 }

@@ -9,27 +9,37 @@ public class Upgrades : MonoBehaviour
     public static byte livesUpgraded = 3;
     public static byte moneyRate = 100;
     public static byte expRate = 100;
+    public static byte maxBombs = 5;
+    public static short bombDamage = 165;
 
     public static int damageCost = 2500;
     public static int livesCost = 5000;
     public static int moneyCost = 7500;
     public static int expCost = 5000;
+    public static int maxBombCost = 2500;
+    public static int bombDamageCost = 5000;
 
     public Text currentMoney;
     public Text damageRateText;
     public Text livesUpgradedText;
     public Text moneyRateText;
     public Text expRateText;
+    public Text maxBombsText;
+    public Text bombDamageText;
 
     public Button damageButton;
     public Button livesButton;
     public Button moneyButton;
     public Button expButton;
+    public Button maxBombButton;
+    public Button bombDamageButton;
 
     public static short damagePriceIncrement = 2500;
     public static short livesPriceIncrement = 2500;
     public static short moneyPriceIncrement = 5000;
     public static short expPriceIncrement = 2500;
+    public static short bombPriceIncrement = 5000;
+    public static short bombDamagePriceIncrement = 2500;
 
     public void Start()
     {
@@ -40,11 +50,15 @@ public class Upgrades : MonoBehaviour
             livesUpgraded = data.livesUpgraded;
             moneyRate = data.moneyRate;
             expRate = data.expRate;
+            maxBombs = data.maxBombs;
+            bombDamage = data.bombDamage;
 
-            damageCost = (5000 + ((damageRate - 100)/5) * damagePriceIncrement);
+            damageCost = (2500 + ((damageRate - 100)/5) * damagePriceIncrement);
             livesCost = (5000 + (livesUpgraded - 3) * livesPriceIncrement);
             moneyCost = (7500 + ((moneyRate - 100)/5) * moneyPriceIncrement);
             expCost = (5000 + ((expRate - 100)/5) * expPriceIncrement);
+            maxBombCost = (2500 + (maxBombs - 5)/2 * bombPriceIncrement);
+            bombDamageCost = (5000 + ((bombDamage - 165) / 20) * bombDamagePriceIncrement);
         }
 
         currentMoney.text = "$" + GameManager.money.ToString();
@@ -53,11 +67,15 @@ public class Upgrades : MonoBehaviour
         livesButton.GetComponentInChildren<Text>().text = "Cost: $" + livesCost;
         moneyButton.GetComponentInChildren<Text>().text = "Cost: $" + moneyCost;
         expButton.GetComponentInChildren<Text>().text = "Cost: $" + expCost;
+        maxBombButton.GetComponentInChildren<Text>().text = "Cost: $" + maxBombCost;
+        bombDamageButton.GetComponentInChildren<Text>().text = "Cost: $" + bombDamageCost;
 
         damageRateText.text = "Current Rate: " + damageRate + "%";
-        livesUpgradedText.text = "Lives: " + livesUpgraded;
+        livesUpgradedText.text = "Max Number of Lives: " + livesUpgraded;
         moneyRateText.text = "Earn Rate: " + moneyRate + "%";
         expRateText.text = "Earn Rate: " + expRate + "%";
+        maxBombsText.text = "Max Number of Bombs: " + maxBombs;
+        bombDamageText.text = "Bomb Damage: " + bombDamage;
     }
 
     public void Update()
@@ -77,8 +95,8 @@ public class Upgrades : MonoBehaviour
             damageCost += damagePriceIncrement;
             damageButton.GetComponentInChildren<Text>().text = "Cost: $" + damageCost;
 
-            SaveSystem.SaveUpgrades(damageRate, livesUpgraded, moneyRate, expRate);
-            SaveSystem.SaveStats(GameManager.money, GameManager.exp);
+            SaveSystem.SaveUpgrades(damageRate, livesUpgraded, moneyRate, expRate, maxBombs, bombDamage);
+            SaveSystem.SaveStats(GameManager.money);
         }
     }
 
@@ -90,12 +108,12 @@ public class Upgrades : MonoBehaviour
             GameManager.money -= livesCost;
             currentMoney.text = "$" + GameManager.money;
             livesUpgraded += 1;
-            livesUpgradedText.text = "Lives: " + livesUpgraded;
+            livesUpgradedText.text = "Max Number of Lives: " + livesUpgraded;
             livesCost += livesPriceIncrement;
             livesButton.GetComponentInChildren<Text>().text = "Cost: $" + livesCost;
 
-            SaveSystem.SaveUpgrades(damageRate, livesUpgraded, moneyRate, expRate);
-            SaveSystem.SaveStats(GameManager.money, GameManager.exp);
+            SaveSystem.SaveUpgrades(damageRate, livesUpgraded, moneyRate, expRate, maxBombs, bombDamage);
+            SaveSystem.SaveStats(GameManager.money);
         }
     }
 
@@ -111,8 +129,8 @@ public class Upgrades : MonoBehaviour
             moneyCost += moneyPriceIncrement;
             moneyButton.GetComponentInChildren<Text>().text = "Cost: $" + moneyCost;
 
-            SaveSystem.SaveUpgrades(damageRate, livesUpgraded, moneyRate, expRate);
-            SaveSystem.SaveStats(GameManager.money, GameManager.exp);
+            SaveSystem.SaveUpgrades(damageRate, livesUpgraded, moneyRate, expRate, maxBombs, bombDamage);
+            SaveSystem.SaveStats(GameManager.money);
         }
     }
 
@@ -128,8 +146,40 @@ public class Upgrades : MonoBehaviour
             expCost += expPriceIncrement;
             expButton.GetComponentInChildren<Text>().text = "Cost: $" + expCost;
 
-            SaveSystem.SaveUpgrades(damageRate, livesUpgraded, moneyRate, expRate);
-            SaveSystem.SaveStats(GameManager.money, GameManager.exp);
+            SaveSystem.SaveUpgrades(damageRate, livesUpgraded, moneyRate, expRate, maxBombs, bombDamage);
+            SaveSystem.SaveStats(GameManager.money);
+        }
+    }
+
+    public void UpgradeMaxBombs()
+    {
+        if(((GameManager.money - maxBombCost) >= 0) && maxBombs < 15)
+        {
+            GameManager.money -= maxBombCost;
+            currentMoney.text = "$" + GameManager.money;
+            maxBombs += 2;
+            maxBombsText.text = "Max Number of Bombs: " + maxBombs;
+            maxBombCost += bombPriceIncrement;
+            maxBombButton.GetComponentInChildren<Text>().text = "Cost: $" + maxBombCost;
+
+            SaveSystem.SaveUpgrades(damageRate, livesUpgraded, moneyRate, expRate, maxBombs, bombDamage);
+            SaveSystem.SaveStats(GameManager.money);
+        }
+    }
+
+    public void UpgradeBombDamage()
+    {
+        if (((GameManager.money - bombDamageCost) >= 0) && bombDamage < 300)
+        {
+            GameManager.money -= bombDamageCost;
+            currentMoney.text = "$" + GameManager.money;
+            bombDamage += 20;
+            bombDamageText.text = "Bomb Damage: " + bombDamage;
+            bombDamageCost += bombDamagePriceIncrement;
+            bombDamageButton.GetComponentInChildren<Text>().text = "Cost: $" + bombDamageCost;
+
+            SaveSystem.SaveUpgrades(damageRate, livesUpgraded, moneyRate, expRate, maxBombs, bombDamage);
+            SaveSystem.SaveStats(GameManager.money);
         }
     }
 }

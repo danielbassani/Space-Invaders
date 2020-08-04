@@ -12,10 +12,15 @@ public class MainMenu : MonoBehaviour
     public GameObject livesScreen;
     public GameObject moneyScreen;
     public GameObject expScreen;
+    public GameObject bombScreen;
+    public GameObject bombDamageScreen;
     public GameObject levelSelect;
     public GameObject levelSelect1;
     public GameObject levelSelect2;
+    public GameObject levelSelect3;
     public GameObject playerCard;
+    public GameObject settingsMenu;
+    public GameObject creditsMenu;
     public GameObject devMenu;
     
     public void Play()
@@ -41,6 +46,10 @@ public class MainMenu : MonoBehaviour
         expScreen.SetActive(false);
         levelSelect1.SetActive(false);
         levelSelect2.SetActive(false);
+        levelSelect3.SetActive(false);
+        bombScreen.SetActive(false);
+        bombDamageScreen.SetActive(false);
+        creditsMenu.SetActive(false);
     }
 
     public void Upgrades()
@@ -58,12 +67,19 @@ public class MainMenu : MonoBehaviour
 
     public void Settings()
     {
-
+        settingsMenu.SetActive(true);
+        mainMenu.SetActive(false);
     }
 
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void Credits()
+    {
+        mainMenu.SetActive(false);
+        creditsMenu.SetActive(true);
     }
 
     public void DevMenu()

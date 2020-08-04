@@ -17,6 +17,7 @@ public class Level5Boss : MonoBehaviour
     public float moveDelay;
     public Rigidbody2D rb;
     public HealthBar healthBar;
+    public GameObject explosion;
 
     private bool waitedShooting = true;
     private bool waitedMoving = true;
@@ -34,6 +35,8 @@ public class Level5Boss : MonoBehaviour
     {
         if (health <= 0)
         {
+            Instantiate(explosion, transform.position, transform.rotation);
+
             Destroy(gameObject);
             GameManager.score += scoreValue;
             GameManager.numEnemiesLeft--;

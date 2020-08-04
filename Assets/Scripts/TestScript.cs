@@ -12,7 +12,7 @@ public class TestScript : MonoBehaviour
     private void Update()
     {
         moneyText.text = "Current Money: " + GameManager.money;
-        expText.text = "Current Exp: " + GameManager.exp;
+        expText.text = "Current Exp: " + GameManager.score;
     }
 
     public void addMoney() {
@@ -21,13 +21,13 @@ public class TestScript : MonoBehaviour
 
     public void addExp()
     {
-        GameManager.exp += 1000;
+        GameManager.score += 1000;
     }
 
     public void Clear()
     {
         GameManager.money = 0;
-        GameManager.exp = 0;
+        GameManager.score = 0;
     }
 
     public void DeleteSaveData()
@@ -50,11 +50,26 @@ public class TestScript : MonoBehaviour
         */
 
         SaveSystem.DeleteSaveData();
-        SaveSystem.LoadStats();
-        SaveSystem.LoadUpgrades();
-        SaveSystem.LoadPlayerCard();
+        Upgrades.damageRate = 100;
+        Upgrades.livesUpgraded = 3;
+        Upgrades.moneyRate = 100;
+        Upgrades.expRate = 100;
+        Upgrades.maxBombs = 5;
+        Upgrades.bombDamage = 165;
+        Upgrades.damageCost = 2500;
+        Upgrades.livesCost = 5000;
+        Upgrades.moneyCost = 7500;
+        Upgrades.expCost = 5000;
+        Upgrades.maxBombCost = 2500;
+        Upgrades.bombDamageCost = 5000;
+        GameManager.levelUnlock = 1;
         int level = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(level);
 
+    }
+
+    public void SaveBombLevel(){
+        SaveSystem.SaveLevelUnlock(60);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

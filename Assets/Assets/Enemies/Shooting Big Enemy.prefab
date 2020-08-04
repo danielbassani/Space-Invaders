@@ -152,7 +152,7 @@ MonoBehaviour:
     type: 3}
   lifeDropPrefab: {fileID: 2605358880373933027, guid: 5606d3616118cd84a84d73d59ffb226e,
     type: 3}
-  health: 300
+  health: 350
   movementSpeed: 0.5
   scoreValue: 225
   moneyValue: 50

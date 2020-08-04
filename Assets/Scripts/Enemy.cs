@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Enemy : MonoBehaviour
@@ -19,11 +20,21 @@ public class Enemy : MonoBehaviour
     public GameObject explosion;
 
     private AudioSource aud;
+    private short bombDamage = GameManager.bombDamage;
+    private int level;
 
     // Start is called before the first frame update
     void Start()
-    {   
-        if(GameManager.level >= 11)
+    {
+        level = SceneManager.GetActiveScene().buildIndex;
+
+        //bombs dont drop until level 10
+        if (level >= 10)
+        {
+            canDropLives = true;
+        }
+        //bombs dont drop until level 16
+        if (level >= 16)
         {
             canDropBombs = true;
         }
@@ -61,14 +72,14 @@ public class Enemy : MonoBehaviour
     {
         if(collision.tag == "Bomb Explosion")
         {
-            health -= 100;
+            health -= bombDamage;
         }
     }
 
     private bool TryDroppingLife()
     {
-        int rand = Random.Range(1, 20);
-        if (rand == 4)
+        int rand = Random.Range(1, 13);
+        if (rand == 1 && GameManager.lives < Upgrades.livesUpgraded)
         {
             Instantiate(lifeDropPrefab, transform.position, transform.rotation);
             GameManager.lives++;
@@ -82,8 +93,8 @@ public class Enemy : MonoBehaviour
 
     private void TryDroppingBomb()
     {
-        int rand = Random.Range(1, 8);
-        if (rand == 1)
+        int rand = Random.Range(1, 10);
+        if (rand == 1 && GameManager.bombs < Upgrades.maxBombs)
         {
             Instantiate(bombDropPrefab, transform.position, transform.rotation);
             GameManager.bombs++;

@@ -6,12 +6,9 @@ using UnityEngine;
 public class SaveData
 {
     public int money;
-    public int exp;
-    public int levelUnlock;
 
-    public SaveData(int money, int exp)
+    public SaveData(int money)
     {
         this.money = money;
-        this.exp = exp;
     }
 }

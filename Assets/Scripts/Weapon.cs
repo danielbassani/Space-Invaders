@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Weapon : MonoBehaviour
 {
@@ -9,14 +10,34 @@ public class Weapon : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject upgradedBullet;
     public Button nukeButton;
+    public short ammo;
+    public Text ammoText;
 
+    private int level;
+    private string sceneName;
     private bool canNuke = true;
     private bool canShoot = true;
     private bool pointer = false;
+    private bool unlimitedAmmo;
+
+    private void Start()
+    {
+        level = SceneManager.GetActiveScene().buildIndex;
+        sceneName = SceneManager.GetActiveScene().name;
+
+        if (level <= 40 || level >= 51|| sceneName == "Endless Mode")
+        {
+            unlimitedAmmo = true;
+        }else if(level > 40 && sceneName != "Endless Mode")
+        {
+            unlimitedAmmo = false;
+            ammoText.text = "Ammo: " + ammo;
+        }
+    }
 
     private void Update()
     {
-        if (pointer)
+        if (pointer && unlimitedAmmo || pointer && ammo > 0)
         {
             ShootWithDelay();
         }
@@ -33,8 +54,15 @@ public class Weapon : MonoBehaviour
         if (canShoot)
         {
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            ammo--;
             GameManager.bulletsFired++;
             canShoot = false;
+
+            if (!unlimitedAmmo)
+            {
+                ammoText.text = "Ammo: " + ammo;
+            }
+
             StartCoroutine("RefreshShoot");
         }
     }

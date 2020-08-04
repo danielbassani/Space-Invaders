@@ -211,7 +211,13 @@ MonoBehaviour:
   enemyBullet: {fileID: 5087175050766712931, guid: 9869c8d41193d764082d8fd4e519e333,
     type: 3}
   health: 6000
+  maxHealth: 0
   movementSpeed: 0.1
   scoreValue: 1000
   moneyValue: 1000
+  shootDelay: []
+  moveDelay: 0
   rb: {fileID: 8055446535781023287}
+  healthBar: {fileID: 0}
+  explosion: {fileID: 8549333358424986170, guid: f56612a607f50c7419643964a0388d35,
+    type: 3}

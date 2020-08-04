@@ -15,6 +15,7 @@ public class EndlessModeManager : MonoBehaviour
 
     private AudioSource unlockSound;
     private bool hasPlayed = false;
+    private bool changed = false;
     private int prevKills = 0;
     private int newKills = 0;
 
@@ -67,6 +68,13 @@ public class EndlessModeManager : MonoBehaviour
         if(newKills > prevKills)
         {
             hasPlayed = false;
+        }
+
+        if(GameManager.kills > 100 && !changed)
+        {
+            SwitchSpawners();
+            changed = true;
+            StartCoroutine("SwitchSpawnerTimer");
         }
         
     }
@@ -133,11 +141,46 @@ public class EndlessModeManager : MonoBehaviour
         StartCoroutine("TextTimer");
     }
 
+    private void SwitchSpawners()
+    {
+        int prevRandom;
+        int rand;
 
+        while (true)
+        {
+            rand = (int)Random.Range(0, enemySpawners.Length);
+
+            if (enemySpawners[rand].activeSelf)
+            {
+                enemySpawners[rand].SetActive(false);
+                Debug.Log("Set Inactive: " + enemySpawners[rand].name);
+                prevRandom = rand;
+                break;
+            }
+        }
+
+        while (true)
+        {
+            rand = (int)Random.Range(0, enemySpawners.Length);
+
+            if (!enemySpawners[rand].activeSelf && prevRandom != rand)
+            {
+                enemySpawners[rand].SetActive(true);
+                Debug.Log("Set Active: " + enemySpawners[rand].name);
+                break;
+            }
+        }
+    }
 
     IEnumerator TextTimer()
     {
         yield return new WaitForSeconds(1.2f);
         unlockTextUI.SetActive(false);
+    }
+
+    IEnumerator SwitchSpawnerTimer()
+    {
+        yield return new WaitForSeconds(15f);
+        changed = false;
     }
 }

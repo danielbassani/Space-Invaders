@@ -43,7 +43,7 @@ public class Bullet : MonoBehaviour
                 if (enemy.health > 0)
                 {
                     //decrease health
-                    enemy.health -= damage * (damageRate/100);
+                    enemy.health -= ((damage * damageRate)/100);
                 }
             }else if (collision.tag == "Boss")
             {
@@ -59,7 +59,7 @@ public class Bullet : MonoBehaviour
                 if (enemy.health > 0)
                 {
                     //decrease health
-                    enemy.health -= damage * (damageRate/ 100f);
+                    enemy.health -= ((damage * damageRate) / 100);
                     enemy.healthBar.SetHealth(enemy.health);
                 }
             }

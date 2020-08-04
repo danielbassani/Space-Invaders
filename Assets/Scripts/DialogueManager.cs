@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject panel;
     public GameObject bombSpawner;
     public string[] text;
+    public static int len;
 
     private Text currentText;
     private int currentIndex;
@@ -44,6 +45,7 @@ public class DialogueManager : MonoBehaviour
             currentText = dialogueUI.GetComponentInChildren<Image>().GetComponentInChildren<Text>();
             currentText.text = text[0];
         }
+        len = length;
     }
 
     public void ScrollText()

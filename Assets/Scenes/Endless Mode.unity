@@ -3369,6 +3369,8 @@ MonoBehaviour:
   upgradedBullet: {fileID: 5087175050766712931, guid: 52885ecc89a8b564096002b0fddfcafc,
     type: 3}
   nukeButton: {fileID: 542723348}
+  ammo: 0
+  ammoText: {fileID: 0}
 --- !u!114 &1260506874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3402,10 +3404,14 @@ MonoBehaviour:
   livesScreen: {fileID: 0}
   moneyScreen: {fileID: 0}
   expScreen: {fileID: 0}
+  bombScreen: {fileID: 0}
+  bombDamageScreen: {fileID: 0}
   levelSelect: {fileID: 0}
   levelSelect1: {fileID: 0}
   levelSelect2: {fileID: 0}
+  levelSelect3: {fileID: 0}
   playerCard: {fileID: 0}
+  settingsMenu: {fileID: 0}
   devMenu: {fileID: 0}
 --- !u!1 &1267501753
 GameObject:
@@ -3963,7 +3969,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 22
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 2
     m_MaxSize: 222
     m_Alignment: 0
@@ -4213,10 +4219,14 @@ MonoBehaviour:
   livesScreen: {fileID: 0}
   moneyScreen: {fileID: 0}
   expScreen: {fileID: 0}
+  bombScreen: {fileID: 0}
+  bombDamageScreen: {fileID: 0}
   levelSelect: {fileID: 0}
   levelSelect1: {fileID: 0}
   levelSelect2: {fileID: 0}
+  levelSelect3: {fileID: 0}
   playerCard: {fileID: 0}
+  settingsMenu: {fileID: 0}
   devMenu: {fileID: 0}
 --- !u!114 &1633595224
 MonoBehaviour:
@@ -5272,10 +5282,14 @@ MonoBehaviour:
   livesScreen: {fileID: 0}
   moneyScreen: {fileID: 0}
   expScreen: {fileID: 0}
+  bombScreen: {fileID: 0}
+  bombDamageScreen: {fileID: 0}
   levelSelect: {fileID: 0}
   levelSelect1: {fileID: 0}
   levelSelect2: {fileID: 0}
+  levelSelect3: {fileID: 0}
   playerCard: {fileID: 0}
+  settingsMenu: {fileID: 0}
   devMenu: {fileID: 0}
 --- !u!114 &2017893011
 MonoBehaviour:
@@ -5511,7 +5525,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbc465d4ece0e244958657dab095a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEndless: 0
   scoreText: {fileID: 1733104117}
   numEnemiesText: {fileID: 2026069988}
   numLivesText: {fileID: 776538392}
@@ -5524,6 +5537,7 @@ MonoBehaviour:
   gameUI: {fileID: 616200526}
   gameOverUI: {fileID: 2017893008}
   winLevelUI: {fileID: 1633595221}
+  bombSpawner: {fileID: 532977954}
 --- !u!82 &2082633403
 AudioSource:
   m_ObjectHideFlags: 0
